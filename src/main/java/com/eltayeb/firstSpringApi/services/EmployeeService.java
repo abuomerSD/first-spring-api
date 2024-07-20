@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Service
 public interface EmployeeService {
-    void save(Employee employee);
+    Employee save(Employee employee);
     List<Employee> findAll();
     Optional<Employee> findById(Integer id);
     void deleteById(Integer id);

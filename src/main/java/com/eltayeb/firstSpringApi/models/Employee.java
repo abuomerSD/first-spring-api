@@ -1,20 +1,24 @@
 package com.eltayeb.firstSpringApi.models;
 
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import lombok.Builder;
 
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_employee")
+//@Builder
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "employee_id_sequence",
+            sequenceName = "employee_id_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "employee_id_sequence")
+
     private Integer id;
     private String firstName;
     private String lastName;
@@ -70,5 +74,16 @@ public class Employee {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", salary=" + salary +
+                '}';
     }
 }
